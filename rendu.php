@@ -28,4 +28,4 @@ function rendu(int $totalAmount, $denominations = [2, 5, 10])
     return implode(" + ", $coins);
 }
 
-print_r(rendu(31));
+echo (rendu(31));
