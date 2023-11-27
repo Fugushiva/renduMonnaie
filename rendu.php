@@ -1,6 +1,6 @@
 <?php
 
-function getCoins(int $totalAmount, $denominations = [2, 5, 10])
+function rendu(int $totalAmount, $denominations = [2, 5, 10])
 {
     $amtPossible = [];
     foreach ($denominations as $d) {
@@ -28,4 +28,4 @@ function getCoins(int $totalAmount, $denominations = [2, 5, 10])
     return implode(" + ", $coins);
 }
 
-print_r(getCoins(1));
+print_r(rendu(31));
