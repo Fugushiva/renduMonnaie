@@ -1,31 +1,41 @@
 <?php
 
-function rendu(int $totalAmount, $denominations = [2, 5, 10])
+function rendu(int $montantTotal, $billetsDisponibles = [2, 5, 10])
 {
-    $amtPossible = [];
-    foreach ($denominations as $d) {
-        $amtPossible[$d] = [1, $d];
-        for ($i = $d + 1; $i <= $totalAmount; ++$i) {
-            if (isset($amtPossible[$i - $d])) {
-                if (!isset($amtPossible[$i]) || $amtPossible[$i][0] > 1 + $amtPossible[$i - $d][0]) {
-                    $amtPossible[$i][0] = 1 + $amtPossible[$i - $d][0];
-                    $amtPossible[$i][1] = $d;
-                }
+    // Tableau pour stocker les combinaisons possibles [nombre de billets, dénomination du billet]
+    $combinaisonsPossibles = [];
+
+    // Parcours des différents billets disponibles
+    foreach ($billetsDisponibles as $billet) {
+        // Initialisation de chaque montant possible avec un billet de la dénomination en cours
+        $combinaisonsPossibles[$billet] = [1, $billet];
+
+        // Boucle pour calculer le nombre minimum de billets pour chaque montant jusqu'au total
+        for ($montant = $billet + 1; $montant <= $montantTotal; ++$montant) {
+            // Vérification si le montant actuel peut être obtenu avec le billet en cours
+            if (isset($combinaisonsPossibles[$montant - $billet])) {
+                // Mise à jour si le nombre minimum de billets est trouvé
+                $nombreBillets = 1 + $combinaisonsPossibles[$montant - $billet][0];
+                $combinaisonsPossibles[$montant] = [$nombreBillets, $billet];
             }
         }
     }
 
-    if (!isset($amtPossible[$totalAmount])) {
-        throw new \Exception("$totalAmount is not possible with the denominations " . implode(",", $denominations));
+    // Vérification si le montant total est possible avec les billets fournis
+    if (!isset($combinaisonsPossibles[$montantTotal])) {
+        throw new \Exception("$montantTotal n'est pas possible avec les billets disponibles " . implode(",", $billetsDisponibles));
     }
 
-    $coins = [];
-    while ($totalAmount > 0) {
-        $coins[] = $amtPossible[$totalAmount][1];
-        $totalAmount -= $amtPossible[$totalAmount][1];
+    // Reconstruction de la combinaison optimale de billets
+    $billetsUtilises = [];
+    while ($montantTotal > 0) {
+        $billetsUtilises[] = $combinaisonsPossibles[$montantTotal][1];
+        $montantTotal -= $combinaisonsPossibles[$montantTotal][1];
     }
 
-    return implode(" + ", $coins);
+    // Retourne la combinaison de billets sous forme de chaîne
+    return implode(" + ", $billetsUtilises);
 }
 
-echo (rendu(31));
+// Exemple d'utilisation avec le montant 31 et des billets de 2, 5, 10
+echo rendu(31);
