@@ -38,4 +38,4 @@ function rendu(int $montantTotal, $billetsDisponibles = [2, 5, 10])
 }
 
 // Exemple d'utilisation avec le montant 31 et des billets de 2, 5, 10
-echo rendu(31);
+echo rendu(11);

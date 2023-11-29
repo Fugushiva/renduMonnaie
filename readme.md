@@ -9,15 +9,7 @@ Cet algorithme en PHP, appelé rendreMonnaie, a pour objectif de rendre la monna
 Vous pouvez utiliser cet algorithme en appelant la fonction rendreMonnaie et en passant en paramètre le montant à rendre. Par exemple :
 
 ```
-rendreMonnaie(10);
-rendreMonnaie(11);
-rendreMonnaie(21);
-rendreMonnaie(23);
-rendreMonnaie(31);
-rendreMonnaie(16);
-rendreMonnaie(15);
-rendreMonnaie(13);
-rendreMonnaie(189);
+echo (rendu($nb));
 ```
 
 ### Fonctionnement
