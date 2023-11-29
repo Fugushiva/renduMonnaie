@@ -20,9 +20,7 @@ L'algorithme parcourt le tableau de billets (10, 5, 2) et teste différentes con
 
 Pour `echo (rendu(31));`, 10+ 10 + 5 + 2 + 2
 
-**Remarques :**
-L'algorithme utilise la division entière (intdiv) pour obtenir le nombre entier de fois qu'un billet peut être utilisé.
-La sortie est affichée sous forme de chaîne pour indiquer les billets rendus.
+
 
 ### **Auteur :**
 
